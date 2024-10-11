@@ -5,7 +5,7 @@ import Card from "../components/Card";
 import CourseIcon from "../components/CourseIcon";
 import getCourseColor from "../utils/getCourseColor";
 import styles from "./CoursePage.module.css";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
 function CoursePage() {
   const {courseSlug} = useParams();
@@ -15,6 +15,10 @@ function CoursePage() {
     borderTopColor: courseColor,
   };
 
+  if (!course) {
+    return <Navigate to="/courses" />;
+  }
+  
   const handleAddWishlistClick = () => {
     addWishlist(course?.slug);
   };
